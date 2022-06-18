@@ -7,8 +7,8 @@ resource "aws_instance" "bastion-1" {
   key_name                    = "ssh-key"
   associate_public_ip_address = "true"
 
-  user_data       = "${file("startup.sh")}" #Ejecuta el script en la instancia
-
+  #user_data       = "${file("startup.sh")}" #Ejecuta el script en la instancia
+  user_data       = data.template_file.wp.rendered
   tags = {
     Name = "bastion-1"
   }
@@ -21,3 +21,12 @@ resource "aws_instance" "bastion-1" {
   }
  
 }
+data "template_file" "wp" {
+    template = file("./startup.tpl")
+    vars = {
+      region_cli = var.region
+      access_cli = var.access
+      secret_cli = var.secret
+      token_cli = var.token
+  }
+ }

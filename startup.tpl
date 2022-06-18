@@ -1,6 +1,10 @@
 #! /bin/bash 
 #Instalacion de aplicaciones necesarias para la preparacion y uso del bastion (Git, Docker, AWS Cli y Kubernetes)
 
+region_cli=${region_cli}
+access_cli=${access_cli}
+token_cli=${token_cli}
+secret_cli=${secret_cli} 
 
 
 sudo yum -y install git
@@ -30,8 +34,25 @@ sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/home/e
 unzip awscliv2.zip
 sudo ./aws/install
 
+sudo mkdir .aws
+touch /home/ec2-user/.aws/credentials
+chmod 777 /home/ec2-user/.aws/credentials
+
+touch /home/ec2-user/.aws/config
+chmod 777 /home/ec2-user/.aws/config
+
+
+echo "[default]" > /home/ec2-user/.aws/config
+echo "region= $region_cli">> /home/ec2-user/.aws/config
+echo "output= json">> /home/ec2-user/.aws/config
+
+echo "[default]" > /home/ec2-user/.aws/credentials
+echo "aws_access_key_id= $access_cli" >> /home/ec2-user/.aws/credentials
+echo "aws_secret_access_key= $secret_cli" >> /home/ec2-user/.aws/credentials
+echo "aws_session_token= $token_cli" >> /home/ec2-user/.aws/credentials
+
 sudo git clone https://github.com/ggomez97/obl-cloud-2022.git
 cd /home/ec2-user/obl-cloud-2022
 
-aws configure
+
 
