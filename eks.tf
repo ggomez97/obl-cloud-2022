@@ -22,7 +22,7 @@ output "kubeconfig-certificate-authority-data" {
   value = aws_eks_cluster.example.certificate_authority[0].data
 }
 
-## WARKER
+## WORKER
 
 resource "aws_eks_node_group" "eks-work-obl" {
   cluster_name    = aws_eks_cluster.example.name
