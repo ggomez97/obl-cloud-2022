@@ -16,6 +16,7 @@ resource "aws_subnet" "subnet-public" {
   cidr_block              = var.public_ip
   availability_zone       = var.zona-1a
   map_public_ip_on_launch = true
+
   tags = {
     Name = "subnet-public"
   }
@@ -44,12 +45,25 @@ resource "aws_subnet" "private-1a" {
   vpc_id            = aws_vpc.main-vpc.id
   cidr_block        = var.private-1-ip
   availability_zone = var.zona-1a
+  map_public_ip_on_launch = true
+  
+
+  tags = {
+    Name = "VPC US-East-1a"
+    resource = "kubernetes.io/cluster/obl-eks-cluster"
+  }
 }
 
 resource "aws_subnet" "private-1b" {
   vpc_id = aws_vpc.main-vpc.id
   cidr_block = var.private-2-ip
   availability_zone = var.zona-1b
+  map_public_ip_on_launch = true
+  tags = {
+    Name = "VPC US-East-1a"
+    resource = "kubernetes.io/cluster/obl-eks-cluster"
+  }
+
 }
 
 resource "aws_internet_gateway" "obl-gw" {
