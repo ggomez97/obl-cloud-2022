@@ -5,7 +5,7 @@ resource "aws_eks_cluster" "cluster_obl" {
   role_arn = aws_iam_role.cluster_obl_role.arn
 
   vpc_config {
-    subnet_ids = [aws_subnet.private-1a.id]
+    subnet_ids = [aws_subnet.private-1a.id,aws_subnet.private-1b.id]
   }
 
   depends_on = [
@@ -27,7 +27,7 @@ resource "aws_eks_node_group" "worker_obl" {
   cluster_name    = aws_eks_cluster.cluster_obl.name
   node_group_name = "worker_obl"
   node_role_arn   = aws_iam_role.worker_obl_role.arn
-  subnet_ids      = [aws_subnet.private-1a.id]
+  subnet_ids      = [aws_subnet.private-1a.id,aws_subnet.private-1b.id]
   instance_types = ["t3.medium"]
 
   scaling_config {
