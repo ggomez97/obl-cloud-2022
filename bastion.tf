@@ -1,14 +1,12 @@
 resource "aws_instance" "bastion-1" {
   ami           = var.ami
   instance_type = var.type
-
   subnet_id                   = aws_subnet.subnet-public.id
   vpc_security_group_ids      = [aws_security_group.sg-bastion.id]
   key_name                    = "ssh-key"
   associate_public_ip_address = "true"
-
-  #user_data       = "${file("startup.sh")}" #Ejecuta el script en la instancia
-  user_data       = data.template_file.wp.rendered
+  
+  user_data       = data.template_file.startup.rendered
   tags = {
     Name = "bastion-1"
   }
@@ -21,7 +19,7 @@ resource "aws_instance" "bastion-1" {
   }
  
 }
-data "template_file" "wp" {
+data "template_file" "startup" {
     template = file("./startup.tpl")
     vars = {
       region_cli = var.region
