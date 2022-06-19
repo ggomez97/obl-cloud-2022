@@ -1,4 +1,4 @@
-##rol cluster
+## ROL FOR CLUSTER
 
 resource "aws_iam_role" "cluster_obl_role" {
   name = "cluster_obl_role"
@@ -25,7 +25,7 @@ resource "aws_iam_role_policy_attachment" "cluster_obl_role-AmazonEKSClusterPoli
 
 
 
-##rol workers
+## ROL FOR WORKER
 
 resource "aws_iam_role" "worker_obl_role" {
   name = "worker_obl_role"
