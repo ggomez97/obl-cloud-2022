@@ -14,6 +14,7 @@ spec:
     spec:
       serviceAccountName: default
       terminationGracePeriodSeconds: 5
+      replicas: 2
       containers:
       - name: server
         image: garto/ort-obl-cloud-2022:recommendationservice
