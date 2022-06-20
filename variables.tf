@@ -7,9 +7,8 @@ variable "token" {}
 #network.tf 
 
 variable "vpc_ip" {}
-variable "public_ip" {}
-variable "private-1-ip" {}
-variable "private-2-ip" {}
+variable "publica-1-ip" {}
+variable "publica-2-ip" {}
 variable "zona-1a" {}
 variable "zona-1b" {}
 

@@ -10,18 +10,19 @@ resource "aws_vpc" "main-vpc" {
   enable_dns_hostnames = true
 }
 #-----------------------------------------------------
-#Subnet publica
-resource "aws_subnet" "subnet-public" {
-  vpc_id                  = aws_vpc.main-vpc.id
-  cidr_block              = var.public_ip
-  availability_zone       = var.zona-1a
-  map_public_ip_on_launch = true
+# #Subnet publica
+# resource "aws_subnet" "subnet-public" {
+#   vpc_id                  = aws_vpc.main-vpc.id
+#   cidr_block              = var.public_ip
+#   availability_zone       = var.zona-1a
+#   map_public_ip_on_launch = true
 
-  tags = {
-    Name = "subnet-public"
-  }
+#   tags = {
+#     Name = "subnet-public"
+#   }
 
-}
+# }
+
 #Permitiendo la ruta default en ir en la GW
 resource "aws_default_route_table" "public-rt" {
   default_route_table_id = aws_vpc.main-vpc.default_route_table_id
@@ -34,19 +35,13 @@ resource "aws_default_route_table" "public-rt" {
   }
 }
 
-#Asociando la ruta con la subnet publica
-resource "aws_route_table_association" "associate_subnet" {
-  subnet_id      = aws_subnet.subnet-public.id
-  route_table_id = aws_default_route_table.public-rt.id
-}
-
 #-------------------------------------------------------------
-resource "aws_subnet" "private-1a" {
+resource "aws_subnet" "publica-1a" {
   vpc_id            = aws_vpc.main-vpc.id
-  cidr_block        = var.private-1-ip
+  cidr_block        = var.publica-1-ip
   availability_zone = var.zona-1a
   map_public_ip_on_launch = true
-  
+
 
   tags = {
     Name = "VPC US-East-1a"
@@ -54,16 +49,15 @@ resource "aws_subnet" "private-1a" {
   }
 }
 
-resource "aws_subnet" "private-1b" {
+resource "aws_subnet" "publica-1b" {
   vpc_id = aws_vpc.main-vpc.id
-  cidr_block = var.private-2-ip
+  cidr_block = var.publica-2-ip
   availability_zone = var.zona-1b
   map_public_ip_on_launch = true
   tags = {
-    Name = "VPC US-East-1a"
+    Name = "VPC US-East-1b"
     resource = "kubernetes.io/cluster/obl-eks-cluster"
   }
-
 }
 
 resource "aws_internet_gateway" "obl-gw" {
