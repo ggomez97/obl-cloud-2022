@@ -5,3 +5,4 @@
 *.html linguist-detectable=false
 *.cs linguist-detectable=false
 *.java linguist-detectable=false
+Dockerfile linguist-detectable=false
