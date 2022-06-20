@@ -5,11 +5,11 @@ region_cli=${region_cli}
 access_cli=${access_cli}
 token_cli=${token_cli}
 secret_cli=${secret_cli} 
+path="/home/ec2-user/obl-cloud-2022/online-boutique"
 
+yum -y install git
 
-sudo yum -y install git
-
-sudo yum remove docker \
+yum remove docker \
                   docker-client \
                   docker-client-latest \
                   docker-common \
@@ -18,23 +18,15 @@ sudo yum remove docker \
                   docker-logrotate \
                   docker-engine
 
-sudo yum install -y yum-utils
-sudo amazon-linux-extras install docker -y
-sudo systemctl enable docker
-sudo systemctl start docker
-sudo usermod -a -G docker ec2-user
+yum install -y yum-utils
+amazon-linux-extras install docker -y
+systemctl enable docker
+systemctl start docker
+usermod -a -G docker ec2-user
 
-#Kubernet
-curl -LO https://dl.k8s.io/release/v1.22.1/bin/linux/amd64/kubectl 
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
-
-#AWS CLI
 cd /home/ec2-user
-sudo curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/home/ec2-user/awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
 
-sudo mkdir .aws
+mkdir .aws
 touch /home/ec2-user/.aws/credentials
 chmod 777 /home/ec2-user/.aws/credentials
 
@@ -51,8 +43,25 @@ echo "aws_access_key_id= $access_cli" >> /home/ec2-user/.aws/credentials
 echo "aws_secret_access_key= $secret_cli" >> /home/ec2-user/.aws/credentials
 echo "aws_session_token= $token_cli" >> /home/ec2-user/.aws/credentials
 
-sudo git clone https://github.com/ggomez97/obl-cloud-2022.git
-cd /home/ec2-user/obl-cloud-2022
+#Kubernet
+curl -LO https://dl.k8s.io/release/v1.22.1/bin/linux/amd64/kubectl 
+install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 
 
+git clone https://github.com/ggomez97/obl-cloud-2022.git
 
+
+su - ec2-user -c "aws eks update-kubeconfig --region us-east-1 --name obl-eks-cluster"
+
+su - ec2-user -c "cd $path && kubectl create -f src/frontend/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/adservice/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/cartservice/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/checkoutservice/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/currencyservice/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/emailservice/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/loadgenerator/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/paymentservice/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/productcatalogservice/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/recommendationservice/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/redis/deployment/kubernetes-manifests.yaml"
+su - ec2-user -c "cd $path && kubectl create -f src/shippingservice/deployment/kubernetes-manifests.yaml"
