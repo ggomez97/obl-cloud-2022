@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: frontend
 spec:
+  replicas: 2  
   selector:
     matchLabels:
       app: frontend
@@ -14,7 +15,6 @@ spec:
       annotations:
         sidecar.istio.io/rewriteAppHTTPProbers: "true"
     spec:
-      replicas: 2      
       serviceAccountName: default
       containers:
         - name: server
