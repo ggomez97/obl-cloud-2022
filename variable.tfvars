@@ -1,9 +1,9 @@
 #provider.tf
 
-region = ""
-access = ""
-secret = ""
-token  = ""
+region = "us-east-1"
+access = "ASIARF72TDE3QNWGOUUB"
+secret = "UT3n11vzhl8Ul9qtOWGpYSPDa/IBVeqTfXjACo6X"
+token  = "FwoGZXIvYXdzEDEaDEAfV4YYQKkSgA5nMSK4AU3UPMw5MQgDDwRiPLRWbBdNnea+AA7vvJiKQS0c5AyjAMHB8wfuuDjHuSX90BhJXJSVDxywfLJ/zjGW1ZeOIfbtaOIgplBb/z5uMp8dYxvoQ4iHlwDIXqkVlo7b/PAx8h6XpzIzhiPtoJvekZMI43WLpYERWTKNQ3IJroJCIxMrz/V0cqOrAZLsfbH+b/tE4oRsHKuYyh+5jSTx9iIuOGfNPX0kKMznLN/ZHydiL26pat+ToffuwG8oqP3DlQYyLTcaggdVPT98aXmcR3gCJ1nyFzs4PjnS7JGBWLKfjdr7olWu4fxXVNk+177ltA=="
 
 #network.tf
 

@@ -1,5 +1,5 @@
 ## CLUSTER
-
+# ** HPA ** Metric server
 resource "aws_eks_cluster" "obl-eks-cluster" {
   name     = "obl-eks-cluster"
   role_arn = var.lab-role

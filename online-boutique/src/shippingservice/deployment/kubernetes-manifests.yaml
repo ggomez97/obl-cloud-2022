@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: shippingservice
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: shippingservice
@@ -13,7 +14,6 @@ spec:
         app: shippingservice
     spec:
       serviceAccountName: default
-      replicas: 2
       containers:
       - name: server
         image: garto/ort-obl-cloud-2022:shippingservice

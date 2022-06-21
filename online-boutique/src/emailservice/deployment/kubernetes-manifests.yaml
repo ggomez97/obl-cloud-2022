@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
   name: emailservice
 spec:
+  replicas: 2
   selector:
     matchLabels:
       app: emailservice
@@ -13,8 +14,7 @@ spec:
         app: emailservice
     spec:
       serviceAccountName: default
-      terminationGracePeriodSeconds: 5
-      replicas: 2
+      terminationGracePeriodSeconds: 5    
       containers:
       - name: server
         image: garto/ort-obl-cloud-2022:emailservice
