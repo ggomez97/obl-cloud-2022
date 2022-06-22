@@ -52,7 +52,7 @@ git clone https://github.com/ggomez97/obl-cloud-2022.git
 
 
 su - ec2-user -c "aws eks update-kubeconfig --region us-east-1 --name obl-eks-cluster"
-
+su - ec2-user -c "kubectl create namespace online-boutique"
 su - ec2-user -c "cd $path && kubectl create -f src/frontend/deployment/kubernetes-manifests.yaml"
 su - ec2-user -c "cd $path && kubectl create -f src/adservice/deployment/kubernetes-manifests.yaml"
 su - ec2-user -c "cd $path && kubectl create -f src/cartservice/deployment/kubernetes-manifests.yaml"
