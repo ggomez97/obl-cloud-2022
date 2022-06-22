@@ -3,10 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: adservice ## Agregar namespace
-<<<<<<< HEAD
-=======
   namespace: online-boutique
->>>>>>> develop
 spec:
   replicas: 2
   selector:
