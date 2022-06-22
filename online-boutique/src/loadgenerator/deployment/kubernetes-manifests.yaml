@@ -34,10 +34,10 @@ spec:
         image: busybox:latest
         env:
         - name: FRONTEND_ADDR
-          value: "frontend:80"
+          value: "${balancerip}"
       containers:
       - name: main
-        image: garto/ort-obl-cloud-2022:loadgenerator #tengo mis dudas jeje saludos
+        image: garto/ort-obl-cloud-2022:loadgenerator
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
