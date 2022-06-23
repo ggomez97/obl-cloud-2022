@@ -40,9 +40,9 @@ spec:
         image: garto/ort-obl-cloud-2022:loadgenerator
         env:
         - name: FRONTEND_ADDR
-          value: "frontend:80"
+          value: "${balancerip}"
         - name: USERS
-          value: "10"
+          value: "20"
         resources:
           requests:
             cpu: 300m

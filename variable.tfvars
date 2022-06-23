@@ -18,5 +18,4 @@ type = "t2.micro"
 
 
 #Cluster
-
 lab-role = "arn:aws:iam::081593047351:role/LabRole"
