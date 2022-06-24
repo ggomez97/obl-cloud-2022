@@ -4,7 +4,7 @@ resource "aws_security_group" "sg-bastion" {   # Este recurso nos permite crear 
   ingress {                                    
     from_port   = 22                           # Se permite el ingreso detrafico entrante del protocolo SSH desde el puerto 22 al puerto 22 desde la red 0.0.0.0/0
     to_port     = 22
-    protocol    = "ssh"
+    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] 
   }
  
