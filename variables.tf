@@ -5,7 +5,6 @@ variable "secret" {}
 variable "token" {}
 
 #network.tf 
-
 variable "vpc_ip" {}
 variable "publica-1-ip" {}
 variable "publica-2-ip" {}
@@ -15,6 +14,8 @@ variable "zona-1b" {}
 #Bastion
 variable "type" {}
 variable "ami" {}
+variable "ssh-key" {}
+variable "ssh-path" {}
 
 #Cluster
 variable "lab-role" {}
