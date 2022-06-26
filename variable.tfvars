@@ -18,7 +18,5 @@ type = "t2.micro"              # El tipo de instancia elegida
 ssh-key= "ssh-key"             # Variable para definir que ssh-key va a utilizarse para conectarse con el bastion.
 ssh-path= "~/ssh-key.pem"      # Path a donde terraform tiene que ir a buscar la clave SSH localmente.
 
-
 #Definimos el rol para porder administrar los recursos desde Kubernetes Control Panel
-
 lab-role = "arn:aws:iam::081593047351:role/LabRole"

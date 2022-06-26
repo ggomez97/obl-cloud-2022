@@ -51,7 +51,6 @@ install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl      # Se instala
 
 git clone https://github.com/ggomez97/obl-cloud-2022.git            # Clonamos el repositorio de github que cuenta con los deployments a crear.
 
-
 su - ec2-user -c "aws eks update-kubeconfig --region us-east-1 --name obl-eks-cluster"   # Conecta el bastion al cluster desde AWS CLI
 su - ec2-user -c "kubectl create namespace online-boutique"                              # Crea un namespace en el cluster               
 su - ec2-user -c "cd $path && kubectl create -f src/frontend/deployment/kubernetes-manifests.yaml" # Crea todo los deployment de los microservicos
