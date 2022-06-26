@@ -62,4 +62,42 @@ En esta se instala y configuran todos los prerequisitos de forma desantendia par
 El desarollo del codigo fue gestionado utilizando GitHub que nos da la hablidad de versionado, crear branches y poder trabajar con un workflow mas seguro.
 Creamos una branch *"Develop"* la cual fue utilizada para el desarollo del codigo, con el objetivo de poder testear los avances o modificaciones del mismo y asi no arrastrar errores hacia la rama principal *"Main"*. De esta forma nos aseguramos que el codigo en la rama *"Main"* sea el *"Last Known Good".*
 
+## Mejoras a futuro:
+
+En esta seccion hablaremos de mejoras en la implementacion que se pueden realizar a futuro para un mejor manejo de fallos.
+
+- ### ABL (Aplication Load Balancer):
+
+Actualmente el servicio de Load Balancer es creado de forma declarativa en el archivo .yaml del microservicio de *"Frontend"*, este load balancer es del tipo *"Classic"*. Esta mejora se debe a que el ABL solo balancea los protocolos HTTP y HTTPS de la aplicacion, lo cual mitiga riesgos de exponer protocolos o puertos no deseados a internet ademas de que el servicio de AWS *"Clasic Load Balancer"* esta siendo deprecado por lo que de aca a unos meses no sera posible utilizarlo.
+
+- ### Usar subnet privadas para EKS y Workers:
+
+Actualmente la infraestructura desarrollada cuenta con 2 subnet publicas las cuales a cada instancia dentro de ellas se le asigna una ip publica, esto presenta un factor de riesgo para la seguridad de la infraestructura.
+
+  - Solucion:
+Para reducir este riesgo de seguridad se utilizarian redes privadas para EKS y con el uso de un NAT Gateway publico podemos redireccionar el trafico de la subnet privada a una publica, de esta forma las intancias en la subnet privada pueden acceder a internet pero no recibir conecciones entrantes que no esten permitidas.
+
+- ### HPA (Horizontal Pod Autoscaling):
+
+Utilizando HPA podemos darle elasticidad, en segundos y de forma automatizada a nuestros pods en los momentos que  esten sobrecargandose.
+Para esto debemos determinar a que porcentaje de uso de nuestros pods debe actuar el escalado.
+
+
+## Como utilizar lo desarrollado:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
