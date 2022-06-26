@@ -50,17 +50,14 @@ Lista de componentes:
   - GitHub
   - Drawio
 
-La arquitectura está basada en micro-servicios, los cuales son desplegados en recursos que proporciona AWS.
-Utilizamos Docker como tecnología de conteiners, las imágenes están en un repositorio público de DockerHub y estas son utilizadas por Kubernetes que nos permite orquestar el deployment de estos micro-servicios así como nos facilita el monitoreo, administracion y la alta disponibilidad de pods.
+La arquitectura está basada en micro-servicios, los cuales son desplegados en recursos que proporciona AWS. Utilizamos Docker como tecnología de conteiners, las imágenes están en un repositorio público de DockerHub y estas son utilizadas por Kubernetes que nos permite orquestar el deployment de estos micro-servicios así como nos facilita el monitoreo, administracion y la alta disponibilidad de pods.
 
-Dentro del cluster de EKS tendremos 2 Workes cada uno en una AZ diferente para tener alta disponibilidad en caso de que un AZ tenga fallas.
-Creamos y utilizamos un namespace llamado *"online-boutique"* el cual nos brinda la posiblilidad de separar logicamente el cluster y tener nuestros microservicios aislados de los demas.
+Dentro del cluster de EKS tendremos 2 Workes cada uno en una AZ diferente para tener alta disponibilidad en caso de que un AZ tenga fallas. Creamos y utilizamos un namespace llamado "online-boutique" el cual nos brinda la posibilidad de separar lógicamente el cluster y tener nuestros microservicios aislados de los demás.
 
-Para lograr la mayor atuomatizacion posbile optamos por la creacion de una instancia EC2 que es utilizada como bastion.
-En esta se instala y configuran todos los prerequisitos de forma desantendia para la utilizacion de Kubernetes, Docker, AWS CLI y con ellos hacer el deployment de nuestros microservicios en diferentes AZ de forma automatizada.
+Para lograr la mayor automatización posible optamos por la creación de una instancia EC2 que es utilizada como bastión. En esta se instala y configuran todos los prerrequisitos de forma desatendida para la utilización de Kubernetes, Docker, AWS CLI y con ellos hacer el deployment de nuestros microservicios en diferentes AZ de forma automatizada.
 
-El desarollo del codigo fue gestionado utilizando GitHub que nos da la hablidad de versionado, crear branches y poder trabajar con un workflow mas seguro.
-Creamos una branch *"Develop"* la cual fue utilizada para el desarollo del codigo, con el objetivo de poder testear los avances o modificaciones del mismo y asi no arrastrar errores hacia la rama principal *"Main"*. De esta forma nos aseguramos que el codigo en la rama *"Main"* sea el *"Last Known Good".*
+El desarrollo del código fue gestionado utilizando GitHub que nos da la habilidad de versionado, crear branches y poder trabajar con un workflow mas seguro. Creamos una branch "Develop" la cual fue utilizada para el desarrollo del código, con el objetivo de poder testear los avances o modificaciones del mismo y así no arrastrar errores hacia la rama principal "Main". De esta forma nos aseguramos que el código en la rama "Main" sea el "Last Known Good".
+
 
 ## Mejoras a futuro:
 
