@@ -65,7 +65,7 @@ En esta sección hablaremos de mejoras en la implementación que se pueden reali
 
 - ### ABL (Aplication Load Balancer):
 
-Actualmente el servicio de Load Balancer es creado de forma declarativa en el archivo .yaml del microservicio de "Frontend", este load balancer es del tipo "Classic". Esta mejora se debe a que el ABL solo balancea los protocolos HTTP y HTTPS de la aplicación, lo cual mitiga riesgos de exponer protocolos o puertos no deseados a internet además de que el servicio de AWS "Clasic Load Balancer" está siendo deprecado por lo que de acá a unos meses no será posible utilizarlo.
+Actualmente el servicio de Load Balancer es creado de forma declarativa por Kubernetes en AWS mediante el archivo .yaml del deployment "Frontend", este load balancer es del tipo "Classic". Esta mejora se debe a que el ABL solo balancea los protocolos HTTP y HTTPS de la aplicación, lo cual mitiga riesgos de exponer protocolos o puertos no deseados a internet además de que el servicio de AWS "Clasic Load Balancer" está siendo deprecado por lo que de acá a unos meses no será posible utilizarlo.
 
 - ### Usar subnet privadas para EKS y Workers:
 
@@ -99,7 +99,7 @@ Se tendran que cambiar las siguientes lineas:
 - *"Secret"*: Se debera llenar con la clave secret de su usuario.
 - *"Token"*: Se debera llenar con la clave del token de su usuario.
 - *"ssh-key"*: Se debera cambiar el contenido del a variable por una clave SSH que su usuario tenga creada y descargada en el host donde se ejecutara el terraform apply.
-- *"ssh-pah"*: Se debe cambiar el contenido de la variable por el path del host en donde se encuentra su clave SSH.
+- *"ssh-path"*: Se debe cambiar el contenido de la variable por el path del host en donde se encuentra su clave SSH.
 - *"lab-Role"*: Debido a que utilizamos AWS Academy no es posible usar IAM, por esto es necesario cambiar el contenido de la variable por el roll de su usuario.
 Lo pude encontrar utilizando la creacion manual de un Cluster desde la web de AWS.
 
