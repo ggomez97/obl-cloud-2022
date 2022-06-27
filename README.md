@@ -27,7 +27,7 @@ Nuestro equipo DevOps realizo la transformación del monolito a una implementaci
 
 Diagrama de arquitectura actual (Micro-Servicios):
 
-![Diagrama](https://github.com/ggomez97/obl-cloud-2022/blob/develop/online-boutique/docs/img/Arquitectura%203.drawio%20(1).png)
+![Diagrama](https://github.com/ggomez97/obl-cloud-2022/blob/main/online-boutique/docs/img/Arquitectura.png)
 
 Lista de componentes: 
 
