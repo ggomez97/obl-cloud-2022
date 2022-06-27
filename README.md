@@ -83,29 +83,29 @@ Para esto debemos determinar a qué porcentaje de uso de nuestros PODs debe actu
 
 ## Guia de uso:
 
-- ### Prerequisitos en el host
+- ### Prerrequisitos en el host
 
 - Tener instalado:
   - Terraform
   - Git  
-- ### Pequeñas configuraciones para el uso de la implementacion desarrollada.
+- ### Pequeñas configuraciones para el uso de la implementación desarrollada.
 
-Al utilizar AWS como provider para realizar la implementacion desarollada es necesario cambiar ciertos valores de las variables declaradas en el archivo variable.tfvars.
+Al utilizar AWS como provider para realizar la implementación desarrollada es necesario cambiar ciertos valores de las variables declaradas en el archivo variable.tfvars.
 
-Se tendran que cambiar las siguientes lineas: 
+Se tendrá que cambiar las siguientes líneas: 
 
-- *"Region"*: Dependiendo en que region se desea levantar la infraestructura desarollada se tiene que cambiar este valor por el deseado.
-- *"Access"*: Se debera llenar con la clave de acceso de su usuario.
-- *"Secret"*: Se debera llenar con la clave secret de su usuario.
-- *"Token"*: Se debera llenar con la clave del token de su usuario.
-- *"ssh-key"*: Se debera cambiar el contenido del a variable por una clave SSH que su usuario tenga creada y descargada en el host donde se ejecutara el terraform apply.
+- *"Region"*: Dependiendo en que región se desea levantar la infraestructura desarrollada se tiene que cambiar este valor por el deseado.
+- *"Access"*: Se deberá llenar con la clave de acceso de su usuario.
+- *"Secret"*: Se deberá llenar con la clave secret de su usuario.
+- *"Token"*: Se deberá llenar con la clave del token de su usuario.
+- *"ssh-key"*: Se deberá cambiar el contenido del a variable por una clave SSH que su usuario tenga creada y descargada en el host donde se ejecutará el terraform apply.
 - *"ssh-path"*: Se debe cambiar el contenido de la variable por el path del host en donde se encuentra su clave SSH.
 - *"lab-Role"*: Debido a que utilizamos AWS Academy no es posible usar IAM, por esto es necesario cambiar el contenido de la variable por el roll de su usuario.
 Lo pude encontrar utilizando la creacion manual de un Cluster desde la web de AWS.
 
 - ### Terraform apply:
 
-Con estos simples comandos se realiza toda la creacion e instalacion de todos recursos necesarios para el funcionamiento de nuestra aplicacion de micro-servicos.
+Con estos simples comandos se realiza toda la creación e instalación de todos recursos necesarios para el funcionamiento de nuestra aplicación de micro-servicos.
 
 ```
 git clone https://github.com/ggomez97/obl-cloud-2022.git
