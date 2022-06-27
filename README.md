@@ -23,7 +23,7 @@ Lista de componentes:
 
 ## Solucion
 
-Nuestro equipo DevOps realizo la transformación del monolito a una implementación del e-commerce basada en una arquitectura microservicios, esta corre sobre containers cuyo ciclo de integración continua ya se encuentra configurado y la solución se encuentra disponible para ser desplegada de forma automática y desatendida.
+Nuestro equipo DevOps realizo la transformación del monolito a una implementación del e-commerce basada en una arquitectura microservicios alojados en containers y luego desplegados en Kubernetes cuyo ciclo de integración continua ya se encuentra configurada, la solución se encuentra disponible para ser desplegada de forma automática y desatendida.
 
 Diagrama de arquitectura actual (Micro-Servicios):
 
