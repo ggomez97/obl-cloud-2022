@@ -2,7 +2,7 @@
 
 ## Propuesta
 
-E-Shop services actualmente cuenta con una arquitectura legacy la cual lo pone en desventaja con su competencia, se contrato la consultora *"BitBeat"* para la modernizar y desplegar la arquitectura e infraestructura de su aplicación que actualmente corre en un datacenter on-premise.
+E-Shop services actualmente cuenta con una arquitectura legacy la cual lo pone en desventaja con su competencia, se contrato la consultora *"BitBeat"* la cual somos parte del equipo DevOps para la modernizar y desplegar la arquitectura e infraestructura de su aplicación de forma automatizada y desatendida, que actualmente corre en un datacenter on-premise.
 
 A continuación, se detalla lo antes mencionado:
 
@@ -23,7 +23,7 @@ Lista de componentes:
 
 ## Solucion
 
-Nuestro equipo DevOps realizo la transformación del monolito a una implementación del e-commerce basada en una arquitectura microservicios alojados en containers y luego desplegados en Kubernetes cuyo ciclo de integración continua ya se encuentra configurada, la solución se encuentra disponible para ser desplegada de forma automática y desatendida.
+Nuestro equipo DevOps realizo la transformación del monolito a una implementación del e-commerce basada en una arquitectura microservicios alojados en containers y luego desplegados en Kubernetes cuyo ciclo de integración continua ya se encuentra configurado, la solución se encuentra disponible para ser desplegada de forma automática y desatendida.
 
 Diagrama de arquitectura actual (Micro-Servicios):
 
@@ -52,11 +52,12 @@ Lista de componentes:
   - GitHub
   - Drawio
 
-La arquitectura está basada en micro-servicios, los cuales son desplegados en recursos que proporciona AWS. Utilizamos Docker como tecnología de conteiners, las imágenes están en un repositorio público de DockerHub y estas son utilizadas por Kubernetes que nos permite orquestar el deployment de estos micro-servicios así como nos facilita el monitoreo, administracion y la alta disponibilidad de pods.
+La arquitectura está basada en micro-servicios, los cuales son desplegados en recursos que proporciona AWS. Utilizamos Docker como tecnología de conteiners, las imágenes de estos están en un repositorio público de DockerHub y son utilizadas por Kubernetes que nos permite orquestar el deployment de estos micro-servicios así como nos facilita el monitoreo, administracion y la alta disponibilidad de los mismos.
 
-Dentro del cluster de EKS tendremos 2 Workes cada uno en una AZ diferente para tener alta disponibilidad en caso de que un AZ tenga fallas. Creamos y utilizamos un namespace llamado "online-boutique" el cual nos brinda la posibilidad de separar lógicamente el cluster y tener nuestros microservicios aislados de los demás.
+Nuestro cluster de EKS se encuentra en 2 subnet privadas en las cuales tendremos 2 Workes cada uno en una AZ diferente para tener alta disponibilidad en caso de que un AZ tenga fallas. Creamos y utilizamos un namespace llamado "online-boutique" el cual nos brinda la posibilidad de separar lógicamente el cluster y tener nuestros microservicios aislados de los demás.
+Al tener los Workers en subnets privadas estos no tienen conexion a internet, por esto implementamos 2 NAT Gateway publicos los cuales permiten que los recursos en las subnets privadas tengan salida a Internet pero que restrigne la entrada de trafico no permitido desde Internet.
 
-Para lograr la mayor automatización posible optamos por la creación de una instancia EC2 que es utilizada como bastión. En esta se instala y configuran todos los prerrequisitos de forma desatendida para la utilización de Kubernetes, Docker, AWS CLI y con ellos hacer el deployment de nuestros microservicios en diferentes AZ de forma automatizada.
+Para lograr la mayor automatización posible optamos por la creación de una instancia EC2 que es utilizada como bastión que se encuentra en una de las subnets puiblicas. En esta se instala y configuran todos los prerrequisitos de forma desatendida para la utilización de Kubernetes, Docker, AWS CLI y con ellos hacer el deployment de nuestros microservicios en los diferentes Workers de forma automatizada.
 
 El desarrollo del código fue gestionado utilizando GitHub que nos da la habilidad de versionado, crear branches y poder trabajar con un workflow mas seguro. Creamos una branch "Develop" la cual fue utilizada para el desarrollo del código, con el objetivo de poder testear los avances o modificaciones del mismo y así no arrastrar errores hacia la rama principal "Main". De esta forma nos aseguramos que el código en la rama "Main" sea el "Last Known Good".
 
@@ -71,15 +72,16 @@ Actualmente el servicio de Load Balancer es creado de forma declarativa por Kube
 - ### HPA (Horizontal Pod Autoscaling)
 
 Utilizando HPA podemos darle elasticidad, en segundos y de forma automatizada a nuestros PODs en los momentos que  estén sobrecargándose.
-Para esto debemos determinar a qué porcentaje de uso de nuestros PODs debe actuar el escalado.
+Para esto debemos determinar en qué porcentaje de uso de nuestros PODs debe actuar el escalado.
 
 ## Guia de uso
 
 - ### Prerrequisitos en el host
 
 - Tener instalado:
-  - Terraform
-  - Git  
+  - Terraform (v1.1.8)
+  - Git (v2.25.1) 
+
 - ### Pequeñas configuraciones para el uso de la implementación desarrollada.
 
 Al utilizar AWS como provider para realizar la implementación desarrollada es necesario cambiar ciertos valores de las variables declaradas en el archivo variable.tfvars.
