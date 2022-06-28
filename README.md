@@ -56,6 +56,10 @@ La arquitectura está basada en micro-servicios, los cuales son desplegados en r
 
 Nuestro cluster de EKS se encuentra en 2 subnet privadas en las cuales tendremos 2 Workes cada uno en una AZ diferente para tener alta disponibilidad en caso de que un AZ tenga fallas. Creamos y utilizamos un namespace llamado "online-boutique" el cual nos brinda la posibilidad de separar lógicamente el cluster y tener nuestros microservicios aislados de los demás.
 Al tener los Workers en subnets privadas estos no tienen conexion a internet, por esto implementamos 2 NAT Gateway publicos los cuales permiten que los recursos en las subnets privadas tengan salida a Internet pero que restrigne la entrada de trafico no permitido desde Internet.
+Como utilizamos NAT Gateway es necesario utilziar *"Route Tables"* para direccionar el trafico entre subnets.
+Se crearon 2 *"Route Tables"* para las subnet privadas (una para cada subnet privada) las cuales dirigen el tafico hacia sus respectivas NAT Gateways y para las subnet publicas se creo una *"Route Tables"* que fue asociada a las mismas dirigiendo el trafico hacia el *"Internet Gateway"*.
+Mediante la utilizacion de *"Security Groups"* solo permitimos al EKS la entrada desde internet por el puerto 80 y el egreso de trafico desde cualquier protocolo/puerto hacia cualquier red. Para el *"Bastion"* solo permitimos la entrada del puerto 22 protocolo TCP.
+
 
 Para lograr la mayor automatización posible optamos por la creación de una instancia EC2 que es utilizada como bastión que se encuentra en una de las subnets puiblicas. En esta se instala y configuran todos los prerrequisitos de forma desatendida para la utilización de Kubernetes, Docker, AWS CLI y con ellos hacer el deployment de nuestros microservicios en los diferentes Workers de forma automatizada.
 
