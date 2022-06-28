@@ -7,8 +7,10 @@ token  = ""
 #Definimos las variables que seran usadas por el archivo network.tf 
 
 vpc_ip       = "10.0.0.0/16" # Rango de IPs para la VPC
-publica-1-ip = "10.0.1.0/24" # Rango de IPs para la subnet 1
-publica-2-ip = "10.0.2.0/24" # Rango de IPs para la subnet 2
+publica-1-ip = "10.0.1.0/24" # Rango de IPs para la publica-subnet 1
+publica-2-ip = "10.0.2.0/24" # Rango de IPs para la publica-subnet 2
+privada-1-ip = "10.0.3.0/24" # Rango de IPs para la privada-subnet 1
+privada-2-ip = "10.0.4.0/24" # Rango de IPs para la privada-subnet 2
 zona-1a      = "us-east-1a"  # Avaiability Zone 1
 zona-1b      = "us-east-1b"  # Avaiability Zone 2
 
