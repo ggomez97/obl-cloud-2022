@@ -11,15 +11,15 @@ Diagrama del Monolito:
 ![Monolito](https://github.com/ggomez97/obl-cloud-2022/blob/develop/online-boutique/docs/img/Monolito.png)
 
 Lista de componentes:
-- Un RP para publicar la aplicación
-- Dos servidores Web para el Frontend
-- Un Servidor web para el control de stock
-- Un servidor web para el carrito de compras
-- Un servidor web para el catálogo
-- Una base de datos relacional
-- Un servidor donde se almacenan documentos estáticos
-- Una base de datos clave-valor
-- Servicios de Cache
+- Un RP para publicar la aplicación.
+- Dos servidores Web para el Frontend.
+- Un Servidor web para el control de stock.
+- Un servidor web para el carrito de compras.
+- Un servidor web para el catálogo.
+- Una base de datos relacional.
+- Un servidor donde se almacenan documentos estáticos.
+- Una base de datos clave-valor.
+- Servicios de Cache.
 
 ## Solucion
 
@@ -37,6 +37,8 @@ Lista de componentes:
   - EKS (Elastic Kubernetes Service)
   - EC2 Instance
   - Clasic Load Balancer
+  - NAT Gateway (Public)
+  - Virtual Private Cloud
 
 - Repositorios:
   - GitHub
@@ -58,30 +60,20 @@ Para lograr la mayor automatización posible optamos por la creación de una ins
 
 El desarrollo del código fue gestionado utilizando GitHub que nos da la habilidad de versionado, crear branches y poder trabajar con un workflow mas seguro. Creamos una branch "Develop" la cual fue utilizada para el desarrollo del código, con el objetivo de poder testear los avances o modificaciones del mismo y así no arrastrar errores hacia la rama principal "Main". De esta forma nos aseguramos que el código en la rama "Main" sea el "Last Known Good".
 
-
-## Mejoras a futuro:
+## Mejoras a futuro
 
 En esta sección hablaremos de mejoras en la implementación que se pueden realizar a futuro para un mejor manejo de fallos.
 
-- ### ABL (Aplication Load Balancer):
+- ### ABL (Aplication Load Balancer)
 
 Actualmente el servicio de Load Balancer es creado de forma declarativa por Kubernetes en AWS mediante el archivo .yaml del deployment "Frontend", este load balancer es del tipo "Classic". Esta mejora se debe a que el ABL solo balancea los protocolos HTTP y HTTPS de la aplicación, lo cual mitiga riesgos de exponer protocolos o puertos no deseados a internet además de que el servicio de AWS "Clasic Load Balancer" está siendo deprecado por lo que de acá a unos meses no será posible utilizarlo.
 
-- ### Usar subnet privadas para EKS y Workers:
-
-Actualmente la infraestructura desarrollada cuenta con 2 subnets públicas las cuales a cada instancia dentro de ellas se le asigna una IP publica, esto presenta un factor de riesgo para la seguridad de la infraestructura.
-
-  - Solucion:
-
-Para reducir este riesgo de seguridad se utilizarian redes privadas para EKS y con el uso de un NAT Gateway publico podemos redireccionar el trafico de la subnet privada a una publica, de esta forma las intancias en la subnet privada pueden acceder a internet pero no recibir conecciones entrantes que no esten permitidas.
-
-- ### HPA (Horizontal Pod Autoscaling):
+- ### HPA (Horizontal Pod Autoscaling)
 
 Utilizando HPA podemos darle elasticidad, en segundos y de forma automatizada a nuestros PODs en los momentos que  estén sobrecargándose.
 Para esto debemos determinar a qué porcentaje de uso de nuestros PODs debe actuar el escalado.
 
-
-## Guia de uso:
+## Guia de uso
 
 - ### Prerrequisitos en el host
 
@@ -103,7 +95,7 @@ Se tendrá que cambiar las siguientes líneas:
 - *"lab-Role"*: Debido a que utilizamos AWS Academy no es posible usar IAM, por esto es necesario cambiar el contenido de la variable por el roll de su usuario.
 Lo pude encontrar utilizando la creacion manual de un Cluster desde la web de AWS.
 
-- ### Terraform apply:
+- ### Terraform apply
 
 Con estos simples comandos se realiza toda la creación e instalación de todos recursos necesarios para el funcionamiento de nuestra aplicación de micro-servicos.
 
@@ -113,21 +105,3 @@ cd obl-cloud-2022/
 terraform init
 terraform apply -var-file variable-tfvars
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
