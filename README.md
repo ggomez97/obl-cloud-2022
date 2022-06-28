@@ -103,5 +103,5 @@ Con estos simples comandos se realiza toda la creación e instalación de todos 
 git clone https://github.com/ggomez97/obl-cloud-2022.git
 cd obl-cloud-2022/
 terraform init
-terraform apply -var-file variable-tfvars
+terraform apply -var-file variable.tfvars
 ```
